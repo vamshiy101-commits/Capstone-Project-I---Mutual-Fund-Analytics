@@ -1,0 +1,250 @@
+Slide 1 — Title
+Bluestock Mutual Fund Analytics
+End-to-End ETL, Performance & Risk Analytics
+
+Capstone Project – Mutual Fund Analytics
+
+Tools & Technologies:
+Python | Pandas | SQL | SQLite | Power BI/Tableau | GitHub
+
+Prepared by: Vamshi Yadav
+
+Slide 2 — Problem & Objectives
+Problem Statement
+
+Mutual fund data is available across multiple datasets containing fund details, NAV history, investor transactions, performance, AUM, and benchmark information.
+
+The project aims to transform this raw data into a clean, structured, and analytics-ready database for meaningful business insights.
+
+Objectives
+Build an automated ETL pipeline
+Ingest and clean multiple CSV datasets
+Validate data quality and consistency
+Design an analytical SQLite database
+Analyze mutual fund performance and risk
+Analyze investor transaction behavior
+Generate actionable insights
+Prepare data for dashboard visualization
+Slide 3 — Data Sources
+Data Sources
+
+The project uses 10 raw CSV datasets:
+
+#	Dataset
+01	Fund Master
+02	NAV History
+03	AUM by Fund House
+04	Monthly SIP Inflows
+05	Category Inflows
+06	Industry Folio Count
+07	Scheme Performance
+08	Investor Transactions
+09	Portfolio Holdings
+10	Benchmark Indices
+Processed Data
+NAV records: 46,000
+Investor transactions: 32,778
+Performance records: 40
+Mutual fund schemes: 40
+Slide 4 — ETL Architecture
+ETL Pipeline Architecture
+
+Use a flow diagram:
+
+RAW CSV DATA
+     ↓
+DATA INGESTION
+     ↓
+DATA CLEANING
+     ↓
+DATA VALIDATION
+     ↓
+PROCESSED CSV FILES
+     ↓
+SQLITE DATABASE
+     ↓
+SQL ANALYTICS
+     ↓
+DASHBOARD
+     ↓
+BUSINESS INSIGHTS
+Automation
+
+The complete pipeline is executed using:
+
+python run_pipeline.py
+Pipeline Status
+
+✅ Data ingestion completed
+✅ Data cleaning completed
+✅ Database loading completed
+✅ Pipeline tested successfully
+
+Slide 5 — EDA Highlights: Fund Analysis
+Exploratory Data Analysis — Fund Performance
+Key areas analyzed:
+Fund house distribution
+Mutual fund categories
+AUM distribution
+1-Year returns
+3-Year returns
+5-Year returns
+Benchmark comparison
+Key Observation
+
+Fund performance varies across categories and schemes. Comparing multiple return periods provides a better understanding of consistency rather than relying only on short-term returns.
+
+📌 Insert your fund performance/category chart here.
+
+Slide 6 — EDA Highlights: Investor Analysis
+Exploratory Data Analysis — Investor Transactions
+Analysis performed on 32,778 transactions
+
+Key dimensions:
+
+Transaction type
+Investment amount
+Age group
+Gender
+State
+City
+City tier
+Payment mode
+KYC status
+Annual income
+Key Observation
+
+Investor transaction analysis helps identify investment behavior, preferred transaction types, customer segments, and geographic patterns.
+
+📌 Insert your investor transaction chart here.
+
+Slide 7 — Performance Metrics
+Mutual Fund Performance Analysis
+
+The project evaluates fund performance using multiple time horizons and benchmark comparisons.
+
+Performance Metrics
+
+1-Year Return
+Measures recent fund performance.
+
+3-Year Return
+Provides a medium-term performance perspective.
+
+5-Year Return
+Helps evaluate longer-term consistency.
+
+Alpha
+Measures performance relative to the benchmark.
+
+Benchmark Return
+Provides a reference point for evaluating fund performance.
+
+Analysis
+
+Funds were compared using historical returns and benchmark-adjusted performance to identify stronger-performing schemes.
+
+📌 Insert your performance comparison chart here.
+
+Slide 8 — Risk Analysis
+Risk & Risk-Adjusted Performance
+
+The project evaluates both return and risk to provide a more complete view of fund quality.
+
+Risk Metrics
+Sharpe Ratio — Return relative to total risk
+Sortino Ratio — Return relative to downside risk
+Beta — Sensitivity to market movements
+Standard Deviation — Measure of volatility
+Maximum Drawdown — Largest historical decline
+VaR — Potential loss at a selected confidence level
+CVaR — Expected loss beyond VaR
+Advanced Analytics
+
+Rolling Sharpe Ratio analysis was performed to study how risk-adjusted performance changes over time.
+
+📌 Insert your rolling_sharpe_chart.png here.
+
+Slide 9 — Dashboard Overview
+Mutual Fund Analytics Dashboard
+
+The dashboard provides an interactive overview of the mutual fund portfolio and investor data.
+
+Dashboard KPIs
+Total Mutual Fund Schemes
+Total AUM
+Average Returns
+Investor Transactions
+Risk Metrics
+Fund Ratings
+Dashboard Features
+Fund filtering
+Category analysis
+Performance comparison
+Risk analysis
+AUM analysis
+Investor transaction analysis
+
+📌 Insert your main dashboard screenshot here.
+
+Slide 10 — Dashboard Analytics
+Performance & Investor Analytics
+Fund Analytics
+Scheme performance comparison
+Category-wise returns
+Benchmark comparison
+Risk-adjusted performance
+AUM analysis
+Investor Analytics
+Transaction type analysis
+SIP and Lumpsum analysis
+Investor demographics
+Geographic analysis
+Payment mode analysis
+Business Value
+
+The dashboard converts complex financial data into interactive visual insights that can support fund evaluation and business decision-making.
+
+📌 Insert your second dashboard screenshot here.
+
+Slide 11 — Key Findings & Recommendations
+Key Findings
+40 mutual fund schemes analyzed
+46,000 NAV records processed
+32,778 investor transactions analyzed
+40 scheme performance records analyzed
+Data quality checks completed successfully
+No missing values were identified in the scheme performance dataset
+No duplicate records were identified in the scheme performance dataset
+No invalid expense-ratio records were detected
+No extreme 1-year return anomalies were detected
+Risk-adjusted performance was analyzed using Sharpe and Sortino ratios
+Advanced VaR, CVaR and rolling Sharpe analysis was performed
+Recommendations
+Evaluate funds using both return and risk metrics
+Compare fund returns against appropriate benchmarks
+Monitor downside risk and maximum drawdown
+Consider expense ratios when comparing similar funds
+Evaluate long-term performance rather than relying only on 1-year returns
+Use investor transaction trends to understand customer behavior
+Slide 12 — Thank You
+Thank You
+Bluestock Mutual Fund Analytics
+Turning Mutual Fund Data into Actionable Insights
+
+Technologies Used
+
+Python | Pandas | SQL | SQLite | Power BI/Tableau | GitHub
+
+Project Deliverables
+
+✅ ETL Pipeline
+✅ SQLite Database
+✅ Advanced Analytics
+✅ Final Report
+✅ 12-Slide Presentation
+✅ Dashboard
+✅ GitHub Repository
+✅ v1.0 Release
+
+Thank You!

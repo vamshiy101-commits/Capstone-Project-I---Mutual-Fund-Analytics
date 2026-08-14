@@ -1,0 +1,899 @@
+BLUESTOCK MUTUAL FUND ANALYTICS
+Final Project Report
+
+Project: Bluestock Mutual Fund Analytics
+Project Type: Data Analytics / ETL Capstone Project
+Tools: Python, Pandas, SQLite, SQL, Power BI/Tableau
+Repository: GitHub Repository
+Version: v1.0
+Prepared by: Vamshi Yadav
+Date: August 2026
+
+1. Executive Summary
+
+The Bluestock Mutual Fund Analytics project is an end-to-end data analytics solution designed to analyze mutual fund schemes, historical NAV performance, investor transactions, fund performance metrics, risk indicators, and assets under management.
+
+The project integrates data from 10 CSV datasets and processes them through a structured ETL pipeline. Python and Pandas were used for data ingestion, cleaning, validation, and transformation. The cleaned datasets were then loaded into a SQLite database using SQLAlchemy.
+
+The final analytical database contains:
+
+40 mutual fund schemes
+46,000 NAV records
+32,778 investor transaction records
+1,150 unique dates
+40 scheme performance records
+40 AUM records
+
+The project also includes advanced analytics such as Sharpe ratio analysis, rolling Sharpe analysis, Value at Risk (VaR), Conditional Value at Risk (CVaR), and mutual fund recommendation analysis.
+
+The objective is to transform raw mutual fund data into meaningful business insights that can support fund comparison, risk assessment, performance evaluation, and investment decision-making.
+
+2. Problem Statement
+
+Mutual fund datasets contain large amounts of information including NAV history, fund performance, investor transactions, risk metrics, AUM, expenses, and benchmark performance.
+
+However, raw datasets are often difficult to analyze directly because they may contain:
+
+Missing values
+Duplicate records
+Inconsistent transaction types
+Incorrect data types
+Unvalidated numerical values
+Multiple independent datasets
+Difficult-to-analyze historical data
+
+The primary problem addressed by this project is:
+
+How can raw mutual fund data be transformed into a clean, structured, and analytical system that provides meaningful insights into fund performance, risk, investor behavior, and fund selection?
+
+3. Project Objectives
+
+The major objectives of the project are:
+
+Collect and ingest multiple mutual fund datasets.
+Perform data quality checks and validation.
+Clean and transform raw datasets using Python.
+Create a structured analytical database.
+Analyze historical NAV trends.
+Analyze mutual fund performance.
+Compare funds against benchmarks.
+Analyze risk and return metrics.
+Analyze investor transaction behavior.
+Analyze AUM and fund characteristics.
+Build advanced performance and risk analytics.
+Develop a dashboard for business-oriented analysis.
+Create a reusable ETL pipeline.
+Provide actionable recommendations based on analytical findings.
+4. Data Sources
+
+The project uses 10 primary CSV datasets stored in the data/raw directory.
+
+Dataset	Description
+01_fund_master.csv	Mutual fund master information
+02_nav_history.csv	Historical NAV data
+03_aum_by_fund_house.csv	AUM information by fund house
+04_monthly_sip_inflows.csv	Monthly SIP inflows
+05_category_inflows.csv	Category-level inflows
+06_industry_folio_count.csv	Industry folio information
+07_scheme_performance.csv	Scheme performance and risk metrics
+08_investor_transactions.csv	Investor transaction data
+09_portfolio_holdings.csv	Portfolio holding information
+10_benchmark_indices.csv	Benchmark index information
+
+The datasets were organized into raw and processed directories to maintain separation between source data and cleaned analytical data.
+
+5. Dataset Overview
+
+The project processes multiple datasets with different analytical purposes.
+
+Fund Master
+
+Contains information about mutual fund schemes, including:
+
+AMFI code
+Scheme name
+Fund house
+Category
+Plan
+NAV History
+
+Contains historical Net Asset Value observations for individual mutual fund schemes.
+
+The final processed NAV dataset contains:
+
+46,000 records
+
+Investor Transactions
+
+Contains investor-level transaction information such as:
+
+Investor ID
+Transaction date
+AMFI code
+Transaction type
+Investment amount
+State
+City
+City tier
+Age group
+Gender
+Annual income
+Payment mode
+KYC status
+
+The final processed transaction dataset contains:
+
+32,778 records
+
+Scheme Performance
+
+Contains:
+
+1-year return
+3-year return
+5-year return
+Benchmark return
+Alpha
+Beta
+Sharpe ratio
+Sortino ratio
+Standard deviation
+Maximum drawdown
+AUM
+Expense ratio
+Morningstar rating
+Risk grade
+
+The dataset contains:
+
+40 mutual fund schemes
+
+6. Technology Stack
+
+The project uses the following technologies:
+
+Python
+
+Python was used as the primary programming language for data ingestion, cleaning, transformation, and analytics.
+
+Pandas
+
+Pandas was used for:
+
+Reading CSV files
+Data cleaning
+Missing-value analysis
+Duplicate detection
+Data transformation
+Aggregation
+Validation
+NumPy
+
+NumPy was used for numerical calculations and analytical operations.
+
+SQLAlchemy
+
+SQLAlchemy was used to connect Python with the SQLite database.
+
+SQLite
+
+SQLite was used as the analytical database for storing the cleaned datasets.
+
+SQL
+
+SQL was used for querying and analyzing the structured database.
+
+Power BI / Tableau
+
+A dashboard can be used to present the final analytical results visually.
+
+7. ETL Architecture
+
+The project follows a structured ETL architecture.
+
+             RAW CSV DATA
+                  │
+                  ▼
+        ┌──────────────────┐
+        │  Data Ingestion  │
+        └────────┬─────────┘
+                 │
+                 ▼
+        ┌──────────────────┐
+        │ Data Cleaning &  │
+        │   Validation     │
+        └────────┬─────────┘
+                 │
+                 ▼
+        ┌──────────────────┐
+        │ Processed CSV    │
+        │     Files        │
+        └────────┬─────────┘
+                 │
+                 ▼
+        ┌──────────────────┐
+        │ SQLite Database  │
+        └────────┬─────────┘
+                 │
+                 ▼
+        ┌──────────────────┐
+        │ SQL Analytics &  │
+        │ Advanced Analysis│
+        └────────┬─────────┘
+                 │
+                 ▼
+        ┌──────────────────┐
+        │ Dashboard &      │
+        │ Final Reporting  │
+        └──────────────────┘
+8. Data Ingestion
+
+The data ingestion process automatically identifies CSV files from the raw data directory.
+
+The ingestion process:
+
+Identifies CSV files.
+Reads each file using Pandas.
+Checks the dataset shape.
+Checks data types.
+Displays sample records.
+Checks missing values.
+Handles file-reading errors.
+
+The project successfully detected and loaded:
+
+10 CSV files
+
+The ingestion process provides a repeatable method for loading the project's raw datasets.
+
+9. Data Cleaning and Validation
+
+Data cleaning was performed using Python and Pandas.
+
+The main cleaning activities included:
+
+Missing Value Checking
+
+Missing values were checked across all relevant columns.
+
+The final scheme performance dataset contained:
+
+0 missing values
+
+Duplicate Checking
+
+Duplicate records were checked before loading the data into the database.
+
+The scheme performance dataset contained:
+
+0 duplicate rows
+
+Data Type Validation
+
+Columns were converted to appropriate numerical and date formats.
+
+Examples include:
+
+Transaction date → datetime
+NAV date → datetime
+Returns → numeric
+Expense ratio → numeric
+AUM → numeric
+NAV Validation
+
+NAV values were checked for invalid values less than or equal to zero.
+
+Transaction Validation
+
+Transaction amounts were validated to identify invalid or non-positive amounts.
+
+Transaction types were standardized into consistent categories such as:
+
+SIP
+Lumpsum
+Redemption
+Performance Validation
+
+Performance return columns were converted to numeric values.
+
+Expense ratios were checked for unreasonable values.
+
+Return anomalies were also checked.
+
+The final validation showed:
+
+0 invalid expense ratio records
+
+and
+
+0 extreme return anomalies
+
+10. Database Design
+
+The cleaned datasets were loaded into a SQLite database named:
+
+bluestock_mf.db
+
+The database follows a dimensional analytical structure.
+
+Dimension Tables
+dim_fund
+
+Contains mutual fund master information.
+
+dim_date
+
+Contains date attributes:
+
+Full date
+Day
+Month
+Year
+Quarter
+Fact Tables
+fact_nav
+
+Contains historical NAV records.
+
+fact_transactions
+
+Contains investor transaction records.
+
+fact_performance
+
+Contains scheme performance and risk metrics.
+
+fact_aum
+
+Contains AUM and selected fund-level metrics.
+
+11. Final Database Statistics
+
+The ETL pipeline successfully created the following tables:
+
+Table	Records
+dim_fund	40
+dim_date	1,150
+fact_nav	46,000
+fact_transactions	32,778
+fact_performance	40
+fact_aum	40
+
+This confirms that the ETL pipeline successfully transformed the source data into a structured analytical database.
+
+
+12. ETL Pipeline Execution
+
+A master pipeline script named:
+
+run_pipeline.py
+
+was created to execute the complete ETL process.
+
+The pipeline performs:
+
+Data Ingestion
+      ↓
+Data Cleaning
+      ↓
+Database Loading
+
+The pipeline was successfully tested using:
+
+python run_pipeline.py
+
+The final execution completed successfully with the message:
+
+ETL PIPELINE COMPLETED SUCCESSFULLY
+
+This demonstrates that the project has a reusable and repeatable ETL workflow.
+
+13. Exploratory Data Analysis
+
+Exploratory Data Analysis was performed to understand the structure and behavior of the mutual fund datasets.
+
+The analysis focused on:
+
+Fund categories
+Fund houses
+NAV trends
+Returns
+Risk
+AUM
+Expense ratios
+Investor transactions
+SIP activity
+Redemption behavior
+Benchmark performance
+
+EDA helps identify patterns and relationships before applying advanced analytics.
+
+14. Mutual Fund Performance Analysis
+
+The scheme performance dataset contains several important performance indicators.
+
+Return Metrics
+
+The project evaluates:
+
+1-year return
+3-year return
+5-year return
+
+Longer-term returns are useful for evaluating consistency over different investment horizons.
+
+Benchmark Comparison
+
+The project compares scheme performance against benchmark returns.
+
+The difference between fund return and benchmark performance can be used to identify funds that outperform or underperform their benchmark.
+
+Alpha
+
+Alpha measures the excess performance of a fund relative to its benchmark.
+
+A positive alpha can indicate outperformance relative to the benchmark.
+
+Beta
+
+Beta measures the sensitivity of the fund to market movements.
+
+A higher beta generally indicates greater sensitivity to market movements.
+
+15. Risk Analysis
+
+Risk analysis is an important component of mutual fund evaluation.
+
+The project includes:
+
+Sharpe Ratio
+
+The Sharpe ratio evaluates return relative to risk.
+
+A higher Sharpe ratio generally indicates better risk-adjusted performance.
+
+Sortino Ratio
+
+The Sortino ratio focuses on downside volatility and evaluates return relative to downside risk.
+
+Standard Deviation
+
+Standard deviation measures the volatility of fund returns.
+
+Higher standard deviation indicates greater variability in returns.
+
+Maximum Drawdown
+
+Maximum drawdown measures the largest decline from a peak to a subsequent trough.
+
+It helps understand potential downside experienced by investors.
+
+16. Advanced Analytics
+
+The project includes additional analytical work beyond basic EDA.
+
+Rolling Sharpe Analysis
+
+Rolling Sharpe analysis helps evaluate how risk-adjusted performance changes over time.
+
+The project generated:
+
+reports/rolling_sharpe_chart.png
+
+This analysis helps identify periods when risk-adjusted performance improves or deteriorates.
+
+Sharpe Summary
+
+A summary file was generated:
+
+reports/sharpe_summary.csv
+
+It provides a structured view of Sharpe ratio performance.
+
+VaR and CVaR
+
+The project also generated:
+
+reports/var_cvar_report.csv
+
+Value at Risk (VaR) estimates potential losses under a specified confidence level.
+
+Conditional Value at Risk (CVaR) estimates the expected loss when losses exceed the VaR threshold.
+
+These metrics provide additional insight into downside risk.
+
+17. Investor Transaction Analysis
+
+The investor transaction dataset contains:
+
+32,778 transaction records
+
+The analysis can be used to understand:
+
+Transaction volumes
+Investment amounts
+SIP activity
+Lumpsum investments
+Redemptions
+Investor demographics
+Geographic distribution
+Payment modes
+KYC status
+City tiers
+Income groups
+
+This provides a business perspective on investor behavior in addition to fund-level performance.
+
+18. Investor Segmentation
+
+Investor transaction data allows investors to be analyzed across multiple dimensions.
+
+Geographic Segmentation
+
+Investors can be compared by:
+
+State
+City
+City tier
+Demographic Segmentation
+
+Analysis can be performed by:
+
+Age group
+Gender
+Annual income
+Transaction Segmentation
+
+Transactions can be grouped by:
+
+SIP
+Lumpsum
+Redemption
+KYC Analysis
+
+KYC status can be used to understand the distribution of:
+
+Verified investors
+Pending investors
+Rejected investors
+
+This segmentation can help identify patterns in investor behavior.
+
+19. AUM Analysis
+
+Assets Under Management (AUM) is an important measure of fund size.
+
+The project created a dedicated:
+
+fact_aum
+
+table containing:
+
+AMFI code
+AUM in crore
+Expense ratio
+Morningstar rating
+
+AUM can be analyzed across fund houses, categories, and individual schemes to understand which funds attract larger asset bases.
+
+20. Expense Ratio Analysis
+
+Expense ratio represents the operating expenses charged by a mutual fund relative to its assets.
+
+The project validates expense ratio values and includes the metric in the analytical database.
+
+Expense ratio can be compared with:
+
+Returns
+Sharpe ratio
+Fund category
+Fund size
+Risk grade
+
+This helps evaluate whether higher costs are associated with stronger performance.
+
+21. Mutual Fund Recommendation Analysis
+
+The project also includes a recommendation component.
+
+Fund selection can consider multiple metrics rather than relying only on returns.
+
+Potential criteria include:
+
+Higher long-term returns
+Positive alpha
+Higher Sharpe ratio
+Higher Sortino ratio
+Lower volatility
+Lower maximum drawdown
+Reasonable expense ratio
+Morningstar rating
+Risk grade
+
+This creates a more balanced approach to fund evaluation.
+
+The recommendation analysis is intended as an analytical aid and should not be considered personalized financial advice.
+
+22. Dashboard
+
+The dashboard is designed to provide an interactive overview of mutual fund performance and investor activity.
+
+Key Dashboard Components
+
+KPI Cards
+
+Total AUM
+Number of Funds
+Average Return
+Average Sharpe Ratio
+
+Performance Analysis
+
+Fund return comparison
+Benchmark comparison
+Category performance
+
+Risk Analysis
+
+Risk vs Return
+Sharpe ratio
+Standard deviation
+Maximum drawdown
+
+Investor Analysis
+
+Transaction volume
+SIP activity
+Redemption activity
+Investor segmentation
+
+Fund Analysis
+
+Fund house comparison
+Category comparison
+AUM comparison
+Dashboard Screenshots
+
+Insert your dashboard screenshots here.
+
+Suggested structure:
+
+[Dashboard Overview Screenshot]
+
+
+Figure 1: Mutual Fund Analytics Dashboard Overview
+[Performance Dashboard Screenshot]
+
+
+Figure 2: Fund Performance and Risk Analysis
+23. Key Findings
+
+The project provides several important analytical capabilities.
+
+Finding 1 — Structured Mutual Fund Dataset
+
+The project successfully consolidated multiple datasets into a centralized analytical database containing 40 schemes and 46,000 NAV records.
+
+Finding 2 — Large Investor Transaction Dataset
+
+The transaction dataset contains 32,778 records, allowing detailed analysis of investor behavior and transaction patterns.
+
+Finding 3 — Strong Data Quality
+
+The scheme performance dataset contains zero missing values and zero duplicate rows after validation.
+
+Finding 4 — Performance and Risk Should Be Evaluated Together
+
+Return alone does not provide a complete picture of fund quality. Metrics such as Sharpe ratio, Sortino ratio, standard deviation, and maximum drawdown provide additional context.
+
+Finding 5 — Benchmark Comparison Adds Context
+
+Comparing scheme returns with benchmark returns helps determine whether a fund has generated meaningful excess performance.
+
+Finding 6 — Advanced Risk Analytics Improve Evaluation
+
+Rolling Sharpe, VaR, and CVaR provide additional information about risk-adjusted performance and downside risk.
+
+24. Recommendations
+
+Based on the analytical framework developed in the project, the following recommendations are proposed:
+
+1. Use Multiple Performance Metrics
+
+Investors and analysts should consider long-term returns together with risk-adjusted metrics.
+
+2. Compare Funds Against Benchmarks
+
+Fund performance should be evaluated relative to an appropriate benchmark rather than using absolute returns alone.
+
+3. Monitor Downside Risk
+
+Maximum drawdown, Sortino ratio, VaR, and CVaR can provide useful information about potential downside.
+
+4. Consider Investment Costs
+
+Expense ratio should be considered when comparing funds with similar performance.
+
+5. Segment Investor Behavior
+
+Investor transaction patterns can be used to understand SIP adoption, redemption behavior, and demographic differences.
+
+6. Automate the ETL Process
+
+The run_pipeline.py script makes it easier to repeatedly ingest, clean, and load updated datasets.
+
+7. Use Dashboards for Continuous Monitoring
+
+A centralized dashboard can help analysts monitor fund performance, AUM, risk, and investor activity efficiently.
+
+25. Limitations
+
+The project has several limitations.
+
+The analysis depends on the quality of the supplied datasets.
+Historical performance does not guarantee future performance.
+The project does not provide personalized financial advice.
+Investor transaction data may not represent the entire mutual fund market.
+Some advanced metrics depend on the available historical data period.
+External macroeconomic factors are not fully incorporated.
+The recommendation model is analytical and rule-based rather than a complete investment advisory system.
+Dashboard results are dependent on the latest available dataset.
+26. Future Enhancements
+
+The project can be extended in several ways.
+
+Real-Time NAV Integration
+
+Automate the retrieval of current NAV information from reliable sources.
+
+Automated Data Refresh
+
+Schedule the ETL pipeline to run automatically.
+
+Machine Learning
+
+Develop models for:
+
+Fund classification
+Risk prediction
+Return prediction
+Investor segmentation
+Advanced Recommendation Engine
+
+Create personalized fund recommendations based on:
+
+Investment horizon
+Risk tolerance
+Financial goals
+Historical behavior
+Cloud Deployment
+
+Move the database and analytics pipeline to a cloud platform.
+
+Automated Dashboard Refresh
+
+Connect the dashboard directly to the analytical database for automatic updates.
+
+27. Project Structure
+
+The final repository follows a structured organization:
+
+Mutual_Fund_ETL_Project/
+│
+├── bluestock_mf.db
+├── README.md
+├── requirements.txt
+├── run_pipeline.py
+│
+├── data/
+│   ├── raw/
+│   │   ├── 01_fund_master.csv
+│   │   ├── 02_nav_history.csv
+│   │   ├── ...
+│   │   └── 10_benchmark_indices.csv
+│   │
+│   └── processed/
+│       ├── 02_nav_history.csv
+│       ├── 07_scheme_performance.csv
+│       ├── 08_investor_transactions.csv
+│       └── scheme_performance.csv
+│
+├── notebooks/
+│   └── Advanced_Analytics.ipynb
+│
+├── reports/
+│   ├── data_dictionary.md
+│   ├── data_quality_summary.md
+│   ├── rolling_sharpe_chart.png
+│   ├── sharpe_summary.csv
+│   └── var_cvar_report.csv
+│
+├── scripts/
+│   ├── amfi_validation.py
+│   ├── check_data.py
+│   ├── check_tables.py
+│   ├── clean_data.py
+│   ├── data_ingestion.py
+│   ├── fund_master_analysis.py
+│   ├── live_nav_fetch.py
+│   ├── load_to_sqlite.py
+│   ├── run_queries.py
+│   └── test_schema.py
+│
+└── sql/
+    ├── queries.sql
+    └── schema.sql
+28. How to Run the Project
+Step 1 — Install dependencies
+pip install -r requirements.txt
+Step 2 — Run the complete ETL pipeline
+python run_pipeline.py
+Step 3 — Verify the database
+
+The pipeline creates/updates:
+
+bluestock_mf.db
+Step 4 — Run analytical scripts/notebooks
+
+Advanced analysis can be performed using:
+
+notebooks/Advanced_Analytics.ipynb
+29. GitHub Deployment
+
+The final project was committed and pushed to GitHub.
+
+The final version was tagged:
+
+v1.0
+
+The repository contains the final ETL scripts, processed datasets, analytical outputs, notebook, database, and project documentation.
+
+The final Git status confirmed:
+
+On branch main
+Your branch is up to date with 'origin/main'.
+
+
+nothing to commit, working tree clean
+
+This confirms that the local project was successfully synchronized with the GitHub repository.
+
+30. Conclusion
+
+The Bluestock Mutual Fund Analytics project successfully demonstrates an end-to-end data analytics workflow, beginning with raw CSV datasets and ending with a structured analytical database and business-oriented insights.
+
+The project successfully processed 10 datasets, 40 mutual fund schemes, 46,000 NAV records, and 32,778 investor transactions.
+
+The ETL pipeline provides a repeatable process for:
+
+Ingestion
+   ↓
+Cleaning
+   ↓
+Validation
+   ↓
+Transformation
+   ↓
+Database Loading
+   ↓
+Analytics
+   ↓
+Dashboard
+
+The combination of performance metrics, risk analysis, investor behavior analysis, AUM analysis, and advanced risk analytics provides a comprehensive framework for understanding mutual fund data.
+
+The project demonstrates practical skills in Python, Pandas, SQL, SQLite, ETL development, data validation, exploratory analysis, risk analysis, visualization, and Git/GitHub-based project management.
+
+Overall, the project establishes a strong foundation for building scalable financial analytics solutions.
+
+31. Thank You
+Thank You
+
+Bluestock Mutual Fund Analytics
+
+Turning Mutual Fund Data into Actionable Insights
+
+Tools: Python | Pandas | SQL | SQLite | Power BI/Tableau | GitHub
+
+GitHub:
+View Project Repository
